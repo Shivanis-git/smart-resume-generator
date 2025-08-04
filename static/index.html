@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini ATS Resume Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🤖 Gemini ATS Resume Generator</h1>
+        <p class="subtitle">Fill in your information to generate an ATS-optimized resume</p>
+        <form id="resumeForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="text" id="jobTitle" placeholder="Job Title" required>
+            <textarea id="experience" placeholder="Work Experience" rows="5"></textarea>
+            <textarea id="skills" placeholder="Skills" rows="3"></textarea>
+            <input type="text" id="education" placeholder="Education (e.g., B.Tech in CSE, XYZ University)">
+            <button type="submit">🚀 Generate Resume</button>
+        </form>
+        <div id="outputSection" style="display:none;">
+            <h2>📄 Generated Resume</h2>
+            <textarea id="resumeOutput" rows="15" readonly></textarea>
+            <button id="downloadBtn">📥 Download Resume</button>
+        </div>
+        <div class="footer">Made with ❤️ using Gemini &amp; Flask</div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

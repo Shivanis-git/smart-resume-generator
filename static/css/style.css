@@ -1,0 +1,78 @@
+body {
+    background: #f7f7f7;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 28px 24px 28px;
+}
+.title {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 0.2em;
+}
+.subtitle {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 1.5em;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+input, textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    background: #fafafa;
+    transition: border 0.2s;
+}
+input:focus, textarea:focus {
+    border: 1.5px solid #4CAF50;
+    outline: none;
+}
+button[type="submit"], #downloadBtn {
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+}
+button[type="submit"]:hover, #downloadBtn:hover {
+    background: #388e3c;
+}
+#outputSection {
+    margin-top: 32px;
+    text-align: center;
+}
+#resumeOutput {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1em;
+    background: #f4f4f4;
+    margin-bottom: 12px;
+}
+.footer {
+    text-align: center;
+    font-size: 0.95em;
+    color: #999;
+    margin-top: 40px;
+}
