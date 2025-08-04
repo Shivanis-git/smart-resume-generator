@@ -1,7 +1,8 @@
+
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
-import google.generativeai as genai
+import cohere
 from dotenv import load_dotenv
 
 app = Flask(__name__, static_folder="static")
@@ -9,10 +10,11 @@ CORS(app)
 
 # Load environment variables
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
+api_key = os.getenv("COHERE_API_KEY")
 
-genai.configure(api_key=api_key)
-MODEL_NAME = "gemini-1.5-pro-latest"
+co = cohere.Client(api_key)
+MODEL_NAME = "command-r-plus"  # or another Cohere model name
+
 
 @app.route('/generate-resume', methods=['POST'])
 def generate_resume():
@@ -36,9 +38,13 @@ Do not add tables or columns.
 Return only the resume text.
 """
     try:
-        model = genai.GenerativeModel(model_name=MODEL_NAME)
-        response = model.generate_content(prompt)
-        return jsonify({'resume': response.text if response else "⚠ No response from Gemini AI."})
+        response = co.chat(
+            model=MODEL_NAME,
+            message=prompt,
+            temperature=0.3,
+            max_tokens=800
+        )
+        return jsonify({'resume': response.text if hasattr(response, 'text') else response.generations[0].text})
     except Exception as e:
         return jsonify({'resume': f"⚠ Error: {str(e)}"}), 500
 
