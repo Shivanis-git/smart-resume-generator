@@ -66,6 +66,16 @@ A smart resume generator powered by Gemini API that supports ATS optimization an
 - Simple UI for user inputs
 - Built with Flask + Cohere API
 - ATS-friendly resume formatting
+  
+# Smart Resume Generator
+
+An AI-powered, ATS-optimized resume generator web app...
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=render)](https://smart-resume-generator.onrender.com/)
+
+## Features
+...
+
 
 ## Setup Instructions
 
@@ -77,11 +87,3 @@ source .venv/bin/activate    # Or .\.venv\Scripts\activate on Windows
 pip install -r requirements.txt
 python app.py
 
-# Smart Resume Generator
-
-An AI-powered, ATS-optimized resume generator web app...
-
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=render)](https://smart-resume-generator.onrender.com/)
-
-## Features
-...
