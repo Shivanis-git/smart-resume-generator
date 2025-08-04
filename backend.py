@@ -24,16 +24,47 @@ def generate_resume():
     experience = data.get('experience', '')
     skills = data.get('skills', '')
     education = data.get('education', '')
+    qualification = data.get('qualification', '')
+    education_details = data.get('educationDetails', '')
+    work_details = data.get('workDetails', '')
+    custom_sections = data.get('customSections', [])
+    email = data.get('email', '')
+    phone = data.get('phone', '')
+    linkedin = data.get('linkedin', '')
+    github = data.get('github', '')
+    address = data.get('address', '')
+    summary = data.get('summary', '')
+    languages = data.get('languages', '')
+    interests = data.get('interests', '')
+    references = data.get('references', '')
+
     prompt = f"""
 Generate a simple, ATS-optimized resume for the following person:
 
 Name: {name}
 Target Job Title: {job_title}
+Email: {email}
+Phone: {phone}
+LinkedIn: {linkedin}
+GitHub: {github}
+Address: {address}
+Summary: {summary}
 Skills: {skills}
+Languages: {languages}
+Interests: {interests}
 Experience: {experience}
+Work Experience Details: {work_details}
 Education: {education}
+Education Details: {education_details}
+Qualification Details: {qualification}
+References: {references}
+"""
+    if custom_sections:
+        for section in custom_sections:
+            prompt += f"\n{section.get('title', '')}: {section.get('content', '')}"
+    prompt += """
 
-Include sections: Summary, Skills, Experience, and Education. Use plain formatting.
+Include sections: Summary, Skills, Languages, Experience, Education, Qualifications, Interests, References, and any custom or qualification sections provided. Use plain formatting.
 Do not add tables or columns.
 Return only the resume text.
 """

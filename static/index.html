@@ -13,26 +13,91 @@
         <p class="subtitle">Create a modern, ATS-optimized resume in seconds. Powered by Cohere LLM.</p>
         <form id="resumeForm" autocomplete="off">
             <div class="input-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="e.g. Jane Doe" required>
+                <label for="email">Email <span class="tip" title="Your professional email address.">&#9432;</span></label>
+                <input type="email" id="email" placeholder="e.g. jane.doe@email.com">
             </div>
             <div class="input-group">
-                <label for="jobTitle">Job Title</label>
+                <label for="phone">Phone <span class="tip" title="Your contact phone number.">&#9432;</span></label>
+                <input type="tel" id="phone" placeholder="e.g. +1 234 567 8901">
+            </div>
+            <div class="input-group">
+                <label for="linkedin">LinkedIn <span class="tip" title="Your LinkedIn profile URL.">&#9432;</span></label>
+                <input type="url" id="linkedin" placeholder="e.g. https://linkedin.com/in/yourname">
+            </div>
+            <div class="input-group">
+                <label for="github">GitHub <span class="tip" title="Your GitHub profile URL (optional).">&#9432;</span></label>
+                <input type="url" id="github" placeholder="e.g. https://github.com/yourname">
+            </div>
+            <div class="input-group">
+                <label for="address">Address <span class="tip" title="Your city, state, or full address (optional).">&#9432;</span></label>
+                <input type="text" id="address" placeholder="e.g. Hyderabad, India">
+            </div>
+            <div class="input-group">
+                <label for="summary">Professional Summary <span class="tip" title="A brief summary about you and your career goals.">&#9432;</span></label>
+                <textarea id="summary" placeholder="e.g. Results-driven data scientist with 3+ years of experience..." rows="2"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="template">Resume Template <span title="Choose a style for your resume." style="cursor:help;color:#2d6cdf;">&#9432;</span></label>
+                <select id="template">
+                    <option value="classic">Classic</option>
+                    <option value="modern">Modern</option>
+                    <option value="minimal">Minimal</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="e.g. Jane Doe" required>
+                <span class="tip" title="Enter your full legal name as you want it to appear on your resume.">&#9432;</span>
+            </div>
+            <div class="input-group">
+                <label for="jobTitle">Job Title <span class="tip" title="The position you are targeting (e.g. Data Scientist)">&#9432;</span></label>
                 <input type="text" id="jobTitle" placeholder="e.g. Data Scientist" required>
             </div>
             <div class="input-group">
-                <label for="experience">Work Experience</label>
+                <label for="experience">Work Experience <span class="tip" title="Summarize your relevant work experience, including roles, companies, and dates.">&#9432;</span></label>
                 <textarea id="experience" placeholder="Describe your work experience..." rows="4"></textarea>
             </div>
             <div class="input-group">
-                <label for="skills">Skills</label>
-                <textarea id="skills" placeholder="e.g. Python, Machine Learning, SQL" rows="2"></textarea>
+                <label for="skills">Skills <span class="tip" title="List your most relevant skills, separated by commas.">&#9432;</span></label>
+                <textarea id="skills" placeholder="e.g. Python, Machine Learning, SQL, Communication, Leadership" rows="2"></textarea>
             </div>
             <div class="input-group">
-                <label for="education">Education</label>
+                <label for="languages">Languages <span class="tip" title="Languages you speak (optional).">&#9432;</span></label>
+                <input type="text" id="languages" placeholder="e.g. English, Hindi, Telugu">
+            </div>
+            <div class="input-group">
+                <label for="interests">Interests <span class="tip" title="Your hobbies or interests (optional).">&#9432;</span></label>
+                <input type="text" id="interests" placeholder="e.g. Reading, Football, AI Research">
+            </div>
+            <div class="input-group">
+                <label for="references">References <span class="tip" title="References or 'Available on request'.">&#9432;</span></label>
+                <input type="text" id="references" placeholder="e.g. Available on request">
+            </div>
+            <div class="input-group">
+                <label for="education">Education <span class="tip" title="Include your highest degree, field, and institution.">&#9432;</span></label>
                 <input type="text" id="education" placeholder="e.g. B.Tech in CSE, XYZ University">
             </div>
+            <div class="input-group">
+                <label for="qualification">Qualification Details <span class="tip" title="List your certifications, awards, or other qualifications.">&#9432;</span></label>
+                <textarea id="qualification" placeholder="e.g. AWS Certified Solutions Architect, Coursera ML Certificate, etc." rows="2"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="educationDetails">Education Details <span class="tip" title="Add more details about your education, such as GPA, coursework, or honors.">&#9432;</span></label>
+                <textarea id="educationDetails" placeholder="e.g. GPA: 3.8/4.0, Relevant Coursework: Machine Learning, Data Structures, etc." rows="2"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="workDetails">Work Experience Details <span class="tip" title="Add more details about your work experience, such as projects, achievements, or responsibilities.">&#9432;</span></label>
+                <textarea id="workDetails" placeholder="e.g. Led a team of 5, Improved process efficiency by 20%, etc." rows="2"></textarea>
+            <div class="input-group">
+                <label for="photo">Profile Photo <span class="tip" title="Upload a professional headshot (optional)">&#9432;</span></label>
+                <input type="file" id="photo" accept="image/*">
+                <img id="photoPreview" src="#" alt="Photo Preview" style="display:none;max-width:100px;margin-top:8px;border-radius:8px;box-shadow:0 2px 8px #ccc;" />
+            </div>
+            <div id="customSections"></div>
+            <button type="button" id="addSectionBtn" class="secondary-btn" style="margin-bottom:10px;">➕ Add Custom Section</button>
+            </div>
             <button type="submit" class="primary-btn">🚀 Generate Resume</button>
+            <button type="button" id="shareBtn" class="secondary-btn" style="margin-left:10px;">📧 Email/Share Resume</button>
         </form>
         <div id="outputSection" style="display:none;">
             <h2>📄 Generated Resume</h2>
