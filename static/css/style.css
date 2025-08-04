@@ -7,70 +7,70 @@ body {
     box-sizing: border-box;
 }
 .container {
-    max-width: 520px;
-    margin: 56px auto 32px auto;
-    background: #fafdff;
-    border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13), 0 1.5px 0 #e3eafc;
-    padding: 44px 38px 34px 38px;
+    max-width: 540px;
+    margin: 64px auto 36px auto;
+    background: #fff;
+    border-radius: 28px;
+    box-shadow: 0 12px 40px rgba(44, 62, 80, 0.16), 0 2px 0 #e3eafc;
+    padding: 54px 44px 40px 44px;
     border: 1.5px solid #e3eafc;
 }
 .title {
     text-align: center;
-    font-size: 2.4em;
-    font-weight: 700;
-    color: #2d6cdf;
-    margin-bottom: 0.1em;
-    letter-spacing: -1px;
+    font-size: 2.6em;
+    font-weight: 800;
+    color: #1b335c;
+    margin-bottom: 0.2em;
+    letter-spacing: -1.5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5em;
+    gap: 0.6em;
 }
 .subtitle {
     text-align: center;
-    font-size: 1.13em;
-    color: #3a4664;
-    margin-bottom: 2.2em;
+    font-size: 1.18em;
+    color: #2d6cdf;
+    margin-bottom: 2.5em;
     font-weight: 500;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.2px;
 }
 form {
     display: flex;
     flex-direction: column;
-    gap: 22px;
-    margin-bottom: 18px;
+    gap: 26px;
+    margin-bottom: 24px;
 }
 .badge {
     background: linear-gradient(90deg, #2d6cdf 60%, #4f8cff 100%);
     color: #fff;
-    font-size: 0.75em;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 0.25em 0.9em;
-    margin-left: 0.7em;
-    letter-spacing: 1.2px;
-    box-shadow: 0 2px 8px rgba(44, 108, 223, 0.13);
+    font-size: 0.8em;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 0.3em 1.1em;
+    margin-left: 0.8em;
+    letter-spacing: 1.5px;
+    box-shadow: 0 2px 10px rgba(44, 108, 223, 0.16);
 }
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 2px;
+    gap: 10px;
+    margin-bottom: 6px;
 }
 label {
-    font-size: 1em;
-    color: #1b335c;
-    font-weight: 600;
-    margin-bottom: 3px;
-    letter-spacing: 0.3px;
+    font-size: 1.08em;
+    color: #2d6cdf;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.4px;
 }
 input, textarea {
-    padding: 13px 15px;
+    padding: 15px 18px;
     border: 1.5px solid #dbeafe;
-    border-radius: 9px;
-    font-size: 1.04em;
-    background: #f7faff;
+    border-radius: 12px;
+    font-size: 1.08em;
+    background: #fafdff;
     transition: border 0.2s, box-shadow 0.2s;
     font-family: inherit;
     color: #1b335c;
@@ -78,50 +78,51 @@ input, textarea {
 input:focus, textarea:focus {
     border: 1.5px solid #2d6cdf;
     outline: none;
-    box-shadow: 0 0 0 2px #b6d0fa;
+    box-shadow: 0 0 0 3px #b6d0fa;
 }
 button[type="submit"], #downloadBtn {
     background: linear-gradient(90deg, #2d6cdf 60%, #4f8cff 100%);
     color: #fff;
     border: none;
-    border-radius: 9px;
-    padding: 15px 0;
-    font-size: 1.11em;
-    font-weight: 700;
+    border-radius: 12px;
+    padding: 17px 0;
+    font-size: 1.15em;
+    font-weight: 800;
     cursor: pointer;
-    margin-top: 12px;
+    margin-top: 14px;
     transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
-    box-shadow: 0 2px 8px rgba(44, 108, 223, 0.10);
+    box-shadow: 0 2px 12px rgba(44, 108, 223, 0.13);
     outline: none;
 }
 #downloadBtn {
     width: 100%;
-    margin-top: 10px;
-    font-size: 1.07em;
-    font-weight: 700;
-    border: 1.5px solid #2d6cdf;
+    margin-top: 14px;
+    font-size: 1.13em;
+    font-weight: 800;
+    border: 2px solid #2d6cdf;
     background: #fff;
     color: #2d6cdf;
     transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
-    box-shadow: 0 2px 8px rgba(44, 108, 223, 0.09);
-    letter-spacing: 0.3px;
-    border-radius: 9px;
+    box-shadow: 0 2px 12px rgba(44, 108, 223, 0.13);
+    letter-spacing: 0.4px;
+    border-radius: 12px;
+    outline: 0;
 }
-}
+
 button[type="submit"]:hover, #downloadBtn:hover {
     background: linear-gradient(90deg, #1b4e8a 60%, #2d6cdf 100%);
     color: #fff;
-    box-shadow: 0 4px 16px rgba(44, 108, 223, 0.15);
-    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(44, 108, 223, 0.18);
+    transform: translateY(-2px) scale(1.03);
 }
 .primary-btn {
     background: linear-gradient(90deg, #2d6cdf 60%, #4f8cff 100%);
     color: #fff;
     border: none;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-top: 12px;
-    border-radius: 9px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    margin-top: 14px;
+    border-radius: 12px;
 }
 .primary-btn:hover {
     background: linear-gradient(90deg, #1b4e8a 60%, #2d6cdf 100%);
@@ -130,10 +131,10 @@ button[type="submit"]:hover, #downloadBtn:hover {
 .secondary-btn {
     background: #fff;
     color: #2d6cdf;
-    border: 1.5px solid #2d6cdf;
-    font-weight: 700;
+    border: 2px solid #2d6cdf;
+    font-weight: 800;
     margin-top: 0;
-    border-radius: 9px;
+    border-radius: 12px;
 }
 .secondary-btn:hover {
     background: #e0eafc;
@@ -141,35 +142,35 @@ button[type="submit"]:hover, #downloadBtn:hover {
     border-color: #1b4e8a;
 }
 #outputSection {
-    margin-top: 38px;
+    margin-top: 44px;
     text-align: center;
     animation: fadeIn 0.5s;
-    background: #f7faff;
-    border-radius: 14px;
-    box-shadow: 0 2px 16px rgba(44, 108, 223, 0.09);
-    padding: 26px 22px 16px 22px;
+    background: #fafdff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(44, 108, 223, 0.13);
+    padding: 32px 28px 20px 28px;
     border: 1.5px solid #e3eafc;
 }
 #resumeOutput {
     width: 100%;
-    border-radius: 11px;
+    border-radius: 14px;
     border: 1.5px solid #dbeafe;
-    padding: 18px;
-    font-size: 1.07em;
+    padding: 22px;
+    font-size: 1.13em;
     background: #fafdff;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     font-family: 'Fira Mono', 'Consolas', monospace;
     resize: vertical;
-    min-height: 260px;
+    min-height: 280px;
     color: #1b335c;
 }
 .footer {
     text-align: center;
-    font-size: 1.01em;
+    font-size: 1.08em;
     color: #6a7a8a;
-    margin-top: 54px;
+    margin-top: 64px;
     letter-spacing: 0.2px;
-    padding-bottom: 22px;
+    padding-bottom: 28px;
     opacity: 0.93;
 }
 
