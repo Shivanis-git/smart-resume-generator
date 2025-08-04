@@ -11,24 +11,42 @@ document.getElementById('resumeForm').addEventListener('submit', async function(
         return;
     }
 
-    // Send data to backend for AI-powered resume generation
-    document.getElementById('resumeOutput').value = 'Generating resume...';
-    document.getElementById('outputSection').style.display = 'block';
+    // Show output section and set loading state
+    const outputSection = document.getElementById('outputSection');
+    const resumeOutput = document.getElementById('resumeOutput');
+    const downloadBtn = document.getElementById('downloadBtn');
+    resumeOutput.value = 'Generating resume...';
+    outputSection.style.display = 'block';
+    downloadBtn.disabled = true;
+    downloadBtn.title = 'Resume not ready yet';
     try {
-        const response = await fetch('http://localhost:5000/generate-resume', {
+        const response = await fetch('/generate-resume', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, jobTitle, experience, skills, education })
         });
         const data = await response.json();
-        document.getElementById('resumeOutput').value = data.resume;
+        if (data.resume && data.resume.length > 0) {
+            resumeOutput.value = data.resume;
+            downloadBtn.disabled = false;
+            downloadBtn.title = 'Download your resume as a .txt file';
+        } else {
+            resumeOutput.value = 'No resume generated. Please try again.';
+            downloadBtn.disabled = true;
+            downloadBtn.title = 'Resume not available';
+        }
     } catch (err) {
-        document.getElementById('resumeOutput').value = 'Error generating resume.';
+        resumeOutput.value = 'Error generating resume.';
+        downloadBtn.disabled = true;
+        downloadBtn.title = 'Resume not available';
     }
 });
 
 document.getElementById('downloadBtn').addEventListener('click', function() {
     const text = document.getElementById('resumeOutput').value;
+    if (!text || text === 'Generating resume...' || text.startsWith('Error') || text.startsWith('No resume')) {
+        return;
+    }
     const blob = new Blob([text], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -38,4 +56,9 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+});
+
+// Auto-select resume text on click for easy copy
+document.getElementById('resumeOutput').addEventListener('click', function() {
+    this.select();
 });
