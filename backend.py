@@ -87,5 +87,43 @@ def serve_index():
 def serve_static(path):
     return send_from_directory(app.static_folder, path)
 
+
+
+# --- Email sending endpoint ---
+# This endpoint sends the generated resume to the specified HR email using Gmail SMTP.
+# Set environment variables SENDER_EMAIL and SENDER_PASSWORD (Gmail app password) before running.
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+@app.route('/send-resume-email', methods=['POST'])
+def send_resume_email():
+    data = request.get_json()
+    hr_email = data.get('hrEmail')
+    resume = data.get('resume')
+    sender_email = os.environ.get('SENDER_EMAIL')  # Your Gmail address
+    sender_password = os.environ.get('SENDER_PASSWORD')  # App password
+
+    if not hr_email or not resume or not sender_email or not sender_password:
+        return jsonify({'success': False, 'error': 'Missing fields'}), 400
+
+    try:
+        # Compose the email
+        msg = MIMEMultipart()
+        msg['From'] = sender_email
+        msg['To'] = hr_email
+        msg['Subject'] = "Resume from Smart Resume Generator"
+        msg.attach(MIMEText(resume, 'plain'))
+
+        # Send the email using Gmail SMTP
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, hr_email, msg.as_string())
+
+        return jsonify({'success': True})
+    except Exception as e:
+        print("Email error:", e)
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)

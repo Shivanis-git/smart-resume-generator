@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Resume Generator Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #f8fafc; }
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 240px;
+            background: linear-gradient(120deg, #e0eafc 0%, #dbeafe 100%);
+            box-shadow: 2px 0 16px #e3eafc;
+            padding: 36px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar h2 { color: #2d6cdf; font-size: 1.4em; margin-bottom: 32px; }
+        .sidebar-nav { width: 100%; }
+        .sidebar-nav button {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #1b335c;
+            font-size: 1.08em;
+            font-weight: 600;
+            padding: 18px 0 18px 36px;
+            text-align: left;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            transition: background 0.2s, border 0.2s, color 0.2s;
+        }
+        .sidebar-nav button.active, .sidebar-nav button:hover {
+            background: #e0eafc;
+            color: #2d6cdf;
+            border-left: 4px solid #2d6cdf;
+        }
+        .main-content {
+            flex: 1;
+            padding: 48px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section-panel { display: none; width: 100%; max-width: 540px; }
+        .section-panel.active { display: block; animation: fadeIn 0.4s; }
+        .dashboard-actions { margin-top: 32px; display: flex; gap: 16px; justify-content: center; }
+        @media (max-width: 800px) {
+            .dashboard-container { flex-direction: column; }
+            .sidebar { width: 100%; flex-direction: row; padding: 0; box-shadow: none; }
+            .sidebar-nav { display: flex; flex-direction: row; width: 100%; }
+            .sidebar-nav button { flex: 1; padding: 14px 0; text-align: center; border-left: none; border-bottom: 4px solid transparent; }
+            .sidebar-nav button.active, .sidebar-nav button:hover { border-left: none; border-bottom: 4px solid #2d6cdf; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+    <nav class="sidebar">
+        <h2>Resume Builder</h2>
+        <div class="sidebar-nav">
+            <button class="active" data-section="home">🏠 Home</button>
+            <button data-section="personal">Personal Info</button>
+            <button data-section="summary">Summary</button>
+            <button data-section="experience">Experience</button>
+            <button data-section="education">Education</button>
+            <button data-section="skills">Skills</button>
+            <button data-section="languages">Languages</button>
+            <button data-section="interests">Interests</button>
+            <button data-section="references">References</button>
+            <button data-section="custom">Custom Sections</button>
+            <button data-section="photo">Profile Photo</button>
+            <button data-section="ats">ATS Score</button>
+            <button data-section="atsupload">ATS Score (Upload Resume)</button>
+            <button data-section="share">Share/Email</button>
+        </div>
+    </nav>
+    <main class="main-content">
+        <form id="resumeForm" autocomplete="off" style="width:100%;max-width:540px;">
+            <div id="section-home" class="section-panel active">
+                <h1 style="font-size:2em;color:#2d6cdf;margin-bottom:0.2em;">Smart Resume Generator</h1>
+                <p style="color:#1b335c;font-size:1.13em;margin-bottom:1.2em;">Create a modern, ATS-optimized resume in seconds. Powered by Cohere LLM.</p>
+                <ul style="color:#2d6cdf;font-size:1.08em;margin-bottom:1.2em;line-height:1.7;">
+                    <li>🚀 <b>AI-Powered Resume Generation</b>: Instantly generate a professional resume with all key sections.</li>
+                    <li>📊 <b>ATS Score Generator</b>: Check how your resume performs with Applicant Tracking Systems.</li>
+                    <li>🧩 <b>Custom Sections</b>: Add certifications, projects, or any extra info you want.</li>
+                    <li>🖼️ <b>Profile Photo Upload</b>: Optionally add a professional headshot.</li>
+                    <li>🎨 <b>Template Choices</b>: Choose from <b>Classic</b>, <b>Modern</b>, or <b>Minimal</b> resume styles.</li>
+                    <li>📧 <b>Email/Share</b>: Send your resume directly to HR or download as text.</li>
+                </ul>
+                <div style="margin-bottom:1.2em;">
+                    <label for="template" style="font-weight:600;color:#2d6cdf;">Choose Resume Template:</label>
+                    <select id="template" style="margin-left:10px;padding:8px 16px;border-radius:8px;border:1.5px solid #dbeafe;font-size:1.08em;">
+                        <option value="classic">Classic</option>
+                        <option value="modern">Modern</option>
+                        <option value="minimal">Minimal</option>
+                    </select>
+                </div>
+                <div style="color:#6a7a8a;font-size:1em;margin-bottom:1.2em;">Tip: Use the sidebar to fill out each section of your resume. You can generate, score, and share your resume from the Share/Email tab.</div>
+            </div>
+            <div id="section-personal" class="section-panel">
+                <div class="input-group"><label for="name">Full Name</label><input type="text" id="name" placeholder="e.g. Jane Doe" required></div>
+                <div class="input-group"><label for="jobTitle">Job Title</label><input type="text" id="jobTitle" placeholder="e.g. Data Scientist" required></div>
+                <div class="input-group"><label for="email">Email</label><input type="email" id="email" placeholder="e.g. jane.doe@email.com"></div>
+                <div class="input-group"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="e.g. +1 234 567 8901"></div>
+                <div class="input-group"><label for="linkedin">LinkedIn</label><input type="url" id="linkedin" placeholder="e.g. https://linkedin.com/in/yourname"></div>
+                <div class="input-group"><label for="github">GitHub</label><input type="url" id="github" placeholder="e.g. https://github.com/yourname"></div>
+                <div class="input-group"><label for="address">Address</label><input type="text" id="address" placeholder="e.g. Hyderabad, India"></div>
+            </div>
+            <div id="section-summary" class="section-panel">
+                <div class="input-group"><label for="summary">Professional Summary</label><textarea id="summary" placeholder="A brief summary about you and your career goals." rows="3"></textarea></div>
+            </div>
+            <div id="section-experience" class="section-panel">
+                <div class="input-group"><label for="experience">Work Experience</label><textarea id="experience" placeholder="Describe your work experience..." rows="4"></textarea></div>
+                <div class="input-group"><label for="workDetails">Work Experience Details</label><textarea id="workDetails" placeholder="e.g. Led a team of 5, Improved process efficiency by 20%, etc." rows="2"></textarea></div>
+            </div>
+            <div id="section-education" class="section-panel">
+                <div class="input-group"><label for="education">Education</label><input type="text" id="education" placeholder="e.g. B.Tech in CSE, XYZ University"></div>
+                <div class="input-group"><label for="educationDetails">Education Details</label><textarea id="educationDetails" placeholder="e.g. GPA: 3.8/4.0, Relevant Coursework: Machine Learning, Data Structures, etc." rows="2"></textarea></div>
+                <div class="input-group"><label for="qualification">Qualification Details</label><textarea id="qualification" placeholder="e.g. AWS Certified Solutions Architect, Coursera ML Certificate, etc." rows="2"></textarea></div>
+            </div>
+            <div id="section-skills" class="section-panel">
+                <div class="input-group"><label for="skills">Skills</label><textarea id="skills" placeholder="e.g. Python, Machine Learning, SQL, Communication, Leadership" rows="2"></textarea></div>
+            </div>
+            <div id="section-languages" class="section-panel">
+                <div class="input-group"><label for="languages">Languages</label><input type="text" id="languages" placeholder="e.g. English, Hindi, Telugu"></div>
+            </div>
+            <div id="section-interests" class="section-panel">
+                <div class="input-group"><label for="interests">Interests</label><input type="text" id="interests" placeholder="e.g. Reading, Football, AI Research"></div>
+            </div>
+            <div id="section-references" class="section-panel">
+                <div class="input-group"><label for="references">References</label><input type="text" id="references" placeholder="e.g. Available on request"></div>
+            </div>
+            <div id="section-custom" class="section-panel">
+                <div style="margin-bottom:18px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                        <span style="font-size:1.2em;color:#2d6cdf;">🧩</span>
+                        <span style="font-weight:600;color:#2d6cdf;">Custom Sections</span>
+                    </div>
+                    <div id="customSections"></div>
+                    <button type="button" id="addSectionBtn" class="secondary-btn" style="margin-top:8px;width:100%;font-size:1.08em;display:flex;align-items:center;justify-content:center;gap:8px;">
+                        <span style="font-size:1.2em;">➕</span> Add Custom Section
+                    </button>
+                </div>
+            </div>
+            <div id="section-photo" class="section-panel">
+                <div class="input-group"><label for="photo">Profile Photo</label><input type="file" id="photo" accept="image/*"><img id="photoPreview" src="#" alt="Photo Preview" style="display:none;max-width:100px;margin-top:8px;border-radius:8px;box-shadow:0 2px 8px #ccc;" /></div>
+            </div>
+            <div id="section-ats" class="section-panel">
+                <div id="atsSection" style="margin-top:24px;">
+                    <h2>📊 ATS Score</h2>
+                    <div id="atsScoreBox" style="font-size:1.2em;margin-bottom:10px;"></div>
+                    <div id="atsFeedback" style="color:#2d6cdf;"></div>
+                    <button type="button" id="closeAtsBtn" class="secondary-btn" style="margin-top:10px;">Close</button>
+                </div>
+            </div>
+            <div id="section-atsupload" class="section-panel">
+                <h2 style="color:#2d6cdf;">ATS Score for Your Resume</h2>
+                <div class="input-group">
+                    <label for="atsUploadInput">Upload Resume (TXT or PDF):</label>
+                    <input type="file" id="atsUploadInput" accept=".txt,.pdf">
+                </div>
+                <div class="input-group">
+                    <label for="atsUploadText">Or paste your resume text below:</label>
+                    <textarea id="atsUploadText" rows="10" placeholder="Paste your resume here..."></textarea>
+                </div>
+                <button type="button" id="atsUploadScoreBtn" class="secondary-btn" style="margin-bottom:10px;">📊 Score My Resume</button>
+                <div id="atsUploadScoreBox" style="font-size:1.1em;margin-bottom:10px;"></div>
+                <div id="atsUploadFeedback" style="color:#2d6cdf;margin-bottom:10px;"></div>
+                <div style="color:#6a7a8a;font-size:0.98em;">Tip: Edit your resume text above and rescore to improve your ATS score!</div>
+            </div>
+            <div id="section-share" class="section-panel">
+                <div class="input-group"><label for="hrEmail">HR Email</label><input type="email" id="hrEmail" placeholder="e.g. hr@company.com"></div>
+                <div class="dashboard-actions">
+                    <button type="submit" class="primary-btn">🚀 Generate Resume</button>
+                    <button type="button" id="atsBtn" class="secondary-btn">📊 ATS Score</button>
+                    <button type="button" id="shareBtn" class="secondary-btn"><span style="font-size:1.2em;">📧</span> Send Resume to HR</button>
+                </div>
+            </div>
+        </form>
+        <div id="outputSection" style="display:none;width:100%;max-width:540px;">
+            <h2>📄 Generated Resume</h2>
+            <textarea id="resumeOutput" rows="15" readonly></textarea>
+            <button id="downloadBtn" class="secondary-btn">📥 Download Resume</button>
+        </div>
+        <div class="footer">Made with <span style="color:#e25555;">&#10084;</span> using Cohere &amp; Flask</div>
+    </main>
+</div>
+<script src="/static/js/script.js"></script>
+<script>
+// Sidebar navigation logic
+const navButtons = document.querySelectorAll('.sidebar-nav button');
+const panels = document.querySelectorAll('.section-panel');
+navButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        navButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        panels.forEach(panel => panel.classList.remove('active'));
+        const section = document.getElementById('section-' + this.dataset.section);
+        if (section) section.classList.add('active');
+    });
+});
+// Hide ATS section by default
+const atsSection = document.getElementById('atsSection');
+if (atsSection) atsSection.style.display = 'none';
+
+// ATS Score for uploaded/pasted resume
+const atsUploadInput = document.getElementById('atsUploadInput');
+const atsUploadText = document.getElementById('atsUploadText');
+const atsUploadScoreBtn = document.getElementById('atsUploadScoreBtn');
+const atsUploadScoreBox = document.getElementById('atsUploadScoreBox');
+const atsUploadFeedback = document.getElementById('atsUploadFeedback');
+if (atsUploadInput) {
+    atsUploadInput.addEventListener('change', async function() {
+        const file = atsUploadInput.files[0];
+        if (!file) return;
+        if (file.type === 'application/pdf') {
+            atsUploadText.value = 'PDF text extraction not supported in browser. Please paste your resume text.';
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            atsUploadText.value = e.target.result;
+        };
+        reader.readAsText(file);
+    });
+}
+if (atsUploadScoreBtn) {
+    atsUploadScoreBtn.addEventListener('click', function() {
+        const resumeText = atsUploadText.value.trim();
+        if (!resumeText) {
+            atsUploadScoreBox.textContent = '';
+            atsUploadFeedback.textContent = 'Paste or upload your resume first.';
+            return;
+        }
+        // Use same keywords as main ATS scoring
+        const keywords = [
+            'python', 'machine learning', 'sql', 'data', 'project', 'leadership', 'communication', 'bachelor', 'master', 'experience', 'skills', 'education', 'certification', 'analysis', 'team', 'ai', 'cloud', 'aws', 'azure', 'statistics', 'research', 'internship', 'achievement', 'result', 'impact', 'problem', 'solution', 'development', 'design', 'testing', 'deployment', 'presentation', 'stakeholder', 'collaboration', 'agile', 'scrum', 'java', 'c++', 'javascript', 'react', 'node', 'database', 'visualization', 'gpa', 'award', 'honor', 'publication', 'reference'
+        ];
+        let score = 0;
+        let found = [];
+        const text = resumeText.toLowerCase();
+        keywords.forEach(word => {
+            if (text.includes(word)) {
+                score++;
+                found.push(word);
+            }
+        });
+        const percent = Math.round((score / keywords.length) * 100);
+        atsUploadScoreBox.textContent = `ATS Score: ${percent} / 100`;
+        atsUploadFeedback.innerHTML = `Matched keywords: <b>${found.join(', ')}</b><br>Tip: Add more relevant keywords for a higher score!`;
+    });
+}
+</script>
+</body>
+</html>

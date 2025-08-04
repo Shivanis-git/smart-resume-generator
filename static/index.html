@@ -88,18 +88,42 @@
             <div class="input-group">
                 <label for="workDetails">Work Experience Details <span class="tip" title="Add more details about your work experience, such as projects, achievements, or responsibilities.">&#9432;</span></label>
                 <textarea id="workDetails" placeholder="e.g. Led a team of 5, Improved process efficiency by 20%, etc." rows="2"></textarea>
+            </div>
             <div class="input-group">
                 <label for="photo">Profile Photo <span class="tip" title="Upload a professional headshot (optional)">&#9432;</span></label>
                 <input type="file" id="photo" accept="image/*">
                 <img id="photoPreview" src="#" alt="Photo Preview" style="display:none;max-width:100px;margin-top:8px;border-radius:8px;box-shadow:0 2px 8px #ccc;" />
             </div>
-            <div id="customSections"></div>
-            <button type="button" id="addSectionBtn" class="secondary-btn" style="margin-bottom:10px;">➕ Add Custom Section</button>
+            <div class="input-group">
+                <label for="hrEmail">HR Email <span class="tip" title="Enter the HR or recruiter's email address to send your resume directly.">&#9432;</span></label>
+                <input type="email" id="hrEmail" placeholder="e.g. hr@company.com">
             </div>
-            <button type="submit" class="primary-btn">🚀 Generate Resume</button>
-            <button type="button" id="shareBtn" class="secondary-btn" style="margin-left:10px;">📧 Email/Share Resume</button>
+            <div id="customSectionArea" style="margin-bottom:18px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                    <span style="font-size:1.2em;color:#2d6cdf;">🧩</span>
+                    <span style="font-weight:600;color:#2d6cdf;">Custom Sections</span>
+                    <span class="tip" title="Add any extra sections like Certifications, Projects, etc.">&#9432;</span>
+                </div>
+                <div id="customSections"></div>
+                <button type="button" id="addSectionBtn" class="secondary-btn" style="margin-top:8px;width:100%;font-size:1.08em;display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <span style="font-size:1.2em;">➕</span> Add Custom Section
+                </button>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <button type="submit" class="primary-btn" style="flex:2 1 180px;min-width:160px;">🚀 Generate Resume</button>
+                <button type="button" id="atsBtn" class="secondary-btn" style="flex:1 1 120px;min-width:110px;">📊 ATS Score</button>
+                <button type="button" id="shareBtn" class="secondary-btn" style="flex:2 1 180px;min-width:160px;background:linear-gradient(90deg,#e0eafc 60%,#f8fafc 100%);color:#2d6cdf;border:2px solid #2d6cdf;font-weight:800;box-shadow:0 2px 8px #e3eafc;display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <span style="font-size:1.2em;">📧</span> Send Resume to HR
+                </button>
+            </div>
         </form>
         <div id="outputSection" style="display:none;">
+        <div id="atsSection" style="display:none;margin-top:24px;">
+            <h2>📊 ATS Score</h2>
+            <div id="atsScoreBox" style="font-size:1.2em;margin-bottom:10px;"></div>
+            <div id="atsFeedback" style="color:#2d6cdf;"></div>
+            <button type="button" id="closeAtsBtn" class="secondary-btn" style="margin-top:10px;">Close</button>
+        </div>
             <h2>📄 Generated Resume</h2>
             <textarea id="resumeOutput" rows="15" readonly></textarea>
             <button id="downloadBtn" class="secondary-btn">📥 Download Resume</button>
